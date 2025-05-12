@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Experiment</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      background: #FFDAB9; 
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      width: 350px;
+      text-align: center;
+      color: #000; 
+    }
+
+    .container h1 {
+      font-size: 28px;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    select option {
+      background: #1a1a1a;
+      color: white;
+    }
+
+    select:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .file-list {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .file-list a {
+      display: block;
+      color: rgb(0, 0, 0);
+      text-decoration: none;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .file-list a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateX(5px);
+    }
+
+    #htmlFiles {
+      display: none;
+    }
+
+    #xmlFiles {
+      display: none;
+    }
+
+    #xsltFiles {
+      display: none;
+    }
+
+    /* Popup styles */
+    .popup-container {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(253, 202, 107, 0.95);
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 80vh;
+      overflow: hidden;
+      z-index: 1000;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .popup-content {
+      color: rgb(0, 0, 0);
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      max-height: calc(80vh - 60px);
+    }
+    
+    .popup-iframe {
+      width: 100%;
+      height: 500px;
+      max-height: calc(80vh - 60px);
+      border: none;
+      background: white;
+      border-radius: 10px;
+      transform: scale(0.95);
+      transform-origin: top center;
+      overflow: hidden;
+    }
+    
+    /* Style for iframe content */
+    .popup-iframe-container {
+      width: 100%;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .close-btn:hover {
+      color: #ff4444;
+    }
+
+    /* Overlay background */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 999;
+    }
+
+    /* XML and XSLT formatting styles */
+    .xml-formatted {
+      font-family: monospace;
+      background: white;
+      border-radius: 10px;
+      padding: 15px;
+      overflow-x: auto;
+      max-height: calc(80vh - 60px);
+    }
+    
+    .xml-tag {
+      color: #0000AA;
+    }
+    
+    .xml-attribute {
+      color: #008800;
+    }
+    
+    .xml-value {
+      color: #CC0000;
+    }
+    
+    .xml-comment {
+      color: #888888;
+      font-style: italic;
+    }
+    
+    .xml-content {
+      color: #333333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>All Experiments</h1>
+    <select id="fileType" onchange="showFiles(this.value)">
+      <option value="" disabled selected>Choose your file</option>
+      <option value="html">HTML</option>
+      <option value="xml">XML</option>
+      <option value="xslt">XSLT</option>
+    </select>
+    <div id="htmlFiles" class="file-list">
+      <a href="assg 1.html">Assignment 1</a>
+      <a href="assg 2.html">Assignment 2</a>
+      <a href="assg 3.html">Assignment 3</a>
+      <a href="assg 4.html">Assignment 4</a>
+      <a href="assg 5.html">Assignment 5</a>
+      <a href="assig 6.html">Assignment 6</a>
+      <a href="assg 7.html">Assignment 7</a>
+      <a href="assg 8.html">Assignment 8</a>
+      <a href="assg 9.html">Assignment 9</a>
+      <a href="assg 10.html">Assignment 10</a>
+    </div>
+    <div id="xmlFiles" class="file-list">
+      <a href="data.xml">data.xml</a>
+      <a href="students.xml">students.xml</a>
+    </div>
+    <div id="xsltFiles" class="file-list">
+      <a href="style.xsl">style.xsl</a>
+      <a href="student-style.xsl">student-style.xsl</a>
+    </div>
+  </div>
+
+  <!-- Add popup container -->
+  <div class="overlay" id="overlay"></div>
+  <div class="popup-container" id="popup">
+    <button class="close-btn" onclick="closePopup()">&times;</button>
+    <div class="popup-iframe-container">
+      <iframe class="popup-iframe" id="popupIframe" style="display:none;"></iframe>
+    </div>
+    <div class="popup-content" id="popupContent"></div>
+  </div>
+
+  <script>
+    function showFiles(fileType) {
+      const htmlFiles = document.getElementById('htmlFiles');
+      const xmlFiles = document.getElementById('xmlFiles');
+      const xsltFiles = document.getElementById('xsltFiles');
+      
+      // Hide all file lists first
+      htmlFiles.style.display = 'none';
+      xmlFiles.style.display = 'none';
+      xsltFiles.style.display = 'none';
+      
+      // Show the selected file list
+      if (fileType === 'html') {
+        htmlFiles.style.display = 'block';
+      } else if (fileType === 'xml') {
+        xmlFiles.style.display = 'block';
+      } else if (fileType === 'xslt') {
+        xsltFiles.style.display = 'block';
+      }
+    }
+
+    async function loadFileContent(filePath) {
+      try {
+        const contentDiv = document.getElementById('popupContent');
+        const iframe = document.getElementById('popupIframe');
+        
+        // Show the popup
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+        
+        // Determine file type from extension
+        const fileExtension = filePath.split('.').pop().toLowerCase();
+        
+        if (fileExtension === 'html') {
+          // For HTML files, use iframe to display rendered content
+          contentDiv.style.display = 'none';
+          iframe.style.display = 'block';
+          iframe.src = filePath;
+          
+          // Add event listener to adjust iframe content
+          iframe.onload = function() {
+            try {
+              // Apply styles to iframe content to make it fit
+              const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+              const style = iframeDoc.createElement('style');
+              style.textContent = `
+                body {
+                  zoom: 0.9;
+                  overflow-x: hidden;
+                  max-width: 100%;
+                  box-sizing: border-box;
+                }
+                table {
+                  max-width: 100%;
+                  display: block;
+                  overflow-x: auto;
+                }
+              `;
+              iframeDoc.head.appendChild(style);
+            } catch (e) {
+              console.error('Could not inject styles into iframe:', e);
+            }
+          };
+        } 
+        else if (fileExtension === 'xml') {
+          // For XML files, check if they have an associated XSLT
+          const response = await fetch(filePath);
+          const xmlText = await response.text();
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(xmlText, 'text/xml');
+          
+          // Check for xml-stylesheet processing instruction
+          let stylesheetHref = null;
+          for (let i = 0; i < xmlDoc.childNodes.length; i++) {
+            const node = xmlDoc.childNodes[i];
+            if (node.nodeType === 7 && node.nodeName === 'xml-stylesheet') {
+              const match = node.nodeValue.match(/href\s*=\s*["']([^"']+)["']/i);
+              if (match) {
+                stylesheetHref = match[1];
+                break;
+              }
+            }
+          }
+          
+          if (stylesheetHref) {
+            // XML has associated XSLT - display rendered in iframe
+            contentDiv.style.display = 'none';
+            iframe.style.display = 'block';
+            iframe.src = filePath;
+            
+            // Add event listener to adjust iframe content
+            iframe.onload = function() {
+              try {
+                // Apply styles to iframe content to make it fit
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                const style = iframeDoc.createElement('style');
+                style.textContent = `
+                  body {
+                    zoom: 0.9;
+                    overflow-x: hidden;
+                    max-width: 100%;
+                    box-sizing: border-box;
+                  }
+                  table {
+                    max-width: 100%;
+                    display: block;
+                    overflow-x: auto;
+                  }
+                `;
+                iframeDoc.head.appendChild(style);
+              } catch (e) {
+                console.error('Could not inject styles into iframe:', e);
+              }
+            };
+          } else {
+            
+            contentDiv.style.display = 'block';
+            iframe.style.display = 'none';
+            
+            const formattedXml = formatXml(xmlText);
+            contentDiv.innerHTML = `<div class="xml-formatted">${formattedXml}</div>`;
+          }
+        }
+        else if (fileExtension === 'xsl' || fileExtension === 'xslt') {
+        
+          const response = await fetch(filePath);
+          const xsltText = await response.text();
+          const parser = new DOMParser();
+          const xsltDoc = parser.parseFromString(xsltText, 'text/xml');
+          
+          if (xsltDoc.getElementsByTagName('parsererror').length > 0) {
+          
+            contentDiv.style.display = 'block';
+            iframe.style.display = 'none';
+            contentDiv.textContent = xsltText;
+          } else {
+            contentDiv.style.display = 'block';
+            iframe.style.display = 'none';
+            
+            const formattedXslt = formatXml(xsltText);
+            contentDiv.innerHTML = `<div class="xml-formatted">${formattedXslt}</div>`;
+          }
+        }
+        else {
+          // For other files, show the raw content
+          const response = await fetch(filePath);
+          const content = await response.text();
+          contentDiv.style.display = 'block';
+          iframe.style.display = 'none';
+          contentDiv.textContent = content;
+        }
+      } catch (error) {
+        console.error('Error loading file:', error);
+        document.getElementById('popupContent').textContent = 'Error loading file: ' + error.message;
+        document.getElementById('popupContent').style.display = 'block';
+        document.getElementById('popupIframe').style.display = 'none';
+      }
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+
+    // Update file links to use loadFileContent
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.file-list a').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          loadFileContent(this.getAttribute('href'));
+        });
+      });
+    });
+
+    // Close popup when clicking overlay
+    document.getElementById('overlay').addEventListener('click', closePopup);
+
+    // Function to format XML/XSLT with syntax highlighting
+    function formatXml(xml) {
+      // Replace special characters to prevent HTML injection
+      xml = xml.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      
+      // Add indentation for readability
+      let formatted = '';
+      let indent = '';
+      let indentSize = 2;
+      
+      // Split by > and process each part
+      const parts = xml.split(/&gt;/);
+      
+      for (let i = 0; i < parts.length; i++) {
+        let part = parts[i];
+        
+        if (part.trim() === '') continue;
+        
+        // Handle self-closing tags and comments
+        if (part.indexOf('&lt;/') >= 0) {
+          indent = ' '.repeat(Math.max(0, indent.length - indentSize));
+          formatted += indent + '&lt;/' + part + '&gt;\n';
+        }
+        else if (part.indexOf('&lt;?') >= 0) {
+          // XML declaration or processing instructions
+          formatted += indent + '&lt;?' + part + '?&gt;\n';
+        }
+        else if (part.indexOf('&lt;!--') >= 0) {
+          // Comments
+          formatted += indent + '&lt;!--' + part.replace('&lt;!--', '') + '--&gt;\n';
+        }
+        else if (part.indexOf('/') === part.length - 1) {
+          // Self-closing tag
+          formatted += indent + '&lt;' + part + '&gt;\n';
+        }
+        else if (part.indexOf('&lt;') >= 0) {
+          // Opening tag
+          formatted += indent + '&lt;' + part + '&gt;\n';
+          indent += ' '.repeat(indentSize);
+        }
+        else {
+          // Content
+          formatted += indent + part + '&gt;\n';
+        }
+      }
+      
+      // Apply syntax highlighting
+      formatted = formatted
+        // Highlight tags
+        .replace(/&lt;(\/?[^\s&]+)([^&]*)&gt;/g, '&lt;<span class="xml-tag">$1</span>$2&gt;')
+        // Highlight attributes
+        .replace(/(\s+)([^\s=]+)(\s*=\s*"[^"]*")/g, '$1<span class="xml-attribute">$2</span>$3')
+        // Highlight attribute values
+        .replace(/=(\s*"[^"]*")/g, '=<span class="xml-value">$1</span>');
+      
+      return formatted;
+    }
+  </script>
+</body>
+</html>
+
+
+
