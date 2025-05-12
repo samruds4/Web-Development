@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroMitra - Digital Companion for Maharashtra Farmers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Add styling for hero background image */
+        #hero {
+            position: relative;
+            overflow: hidden;
+            background-image: url('hero-image.jpg');
+            background-size: cover;
+            background-position: center;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Black overlay with 70% opacity */
+            z-index: 1;
+        }
+        
+        /* Ensure text is readable over the background image */
+        #hero .section-content {
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+            width: 100%;
+        }
+        
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        #hero h2 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+        
+        /* Hide the original parallax background */
+        #hero .parallax-bg.hero-bg {
+            display: none;
+        }
+        
+        /* Refinements for navbar */
+        .navbar {
+            background-color: #ffffff !important; 
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .theme-toggle:checked ~ .theme-container .navbar {
+            background-color: #121212 !important;
+            border-bottom: 1px solid #2d2d2d;
+        }
+        
+        @media (max-width: 992px) {
+            .nav-links {
+                background-color: #ffffff !important;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            
+            .theme-toggle:checked ~ .theme-container .nav-links {
+                background-color: #121212 !important;
+                border-bottom: 1px solid #2d2d2d;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            /* Add this to reorder image and text */
+            .about-content {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .about-image {
+                order: 1;
+                margin-bottom: 30px;
+            }
+
+            .about-text {
+                order: 2;
+            }
+            
+            .schemes-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            #hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            #hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .feature-card {
+                padding: 20px 15px;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                line-height: 60px;
+                font-size: 24px;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .testimonial {
+                padding: 20px 15px;
+            }
+            
+            .testimonial-author {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .author-img {
+                margin: 0 auto 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .cta-button {
+                width: 100%;
+                margin: 5px 0;
+                text-align: center;
+            }
+            
+            .testimonial-content p {
+                font-size: 0.9rem;
+            }
+            
+            .scheme-card {
+                padding: 15px;
+            }
+            
+            .scheme-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="container nav-container">
+                <div class="logo">AgroMitra</div>
+                <input type="checkbox" id="nav-toggle" class="nav-toggle">
+                <label for="nav-toggle" class="nav-toggle-label">
+                    <span></span>
+                </label>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="fertilizer-shop.html" class="nav-link">Fertilizer Shop</a></li>
+                    <li><a href="govt-schemes.html" class="nav-link">Govt Schemes</a></li>
+                    <li><a href="about.html" class="nav-link">About & Contact</a></li>
+                    <li class="language-switch">
+                        <a href="#" class="lang-btn">EN | मराठी</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Remove Theme Switcher Toggle section -->
+        
+        <!-- Hero Section -->
+        <section id="hero" class="parallax-section">
+            <div class="parallax-bg hero-bg"></div>
+            <div class="container section-content">
+                <h1 class="animate-on-scroll">AgroMitra</h1>
+                <h2 class="animate-on-scroll" data-delay="200">Empowering Farmers of Maharashtra</h2>
+                <p class="animate-on-scroll" data-delay="400">Your digital companion for farming success with expert advice, resources, and tools</p>
+                <div class="cta-buttons animate-on-scroll" data-delay="600">
+                    <a href="crop-info.html" class="cta-button">Explore Crop Info</a>
+                    <a href="govt-schemes.html" class="cta-button secondary">Government Schemes</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Portal Section -->
+        <section id="about-portal" class="parallax-section">
+            <div class="parallax-bg about-bg"></div>
+            <div class="container section-content">
+                <h2 class="section-title animate-on-scroll">About Our Portal</h2>
+                <div class="about-content">
+                    <div class="about-image animate-on-scroll" data-delay="200">
+                        <div class="portal-img"></div>
+                    </div>
+                    <div class="about-text">
+                        <p class="animate-on-scroll" data-delay="300"><span lang="mr">शेतकरी मित्रांनो,</span> Welcome to AgroMitra - your complete digital companion for successful farming in Maharashtra.</p>
+                        <p class="animate-on-scroll" data-delay="400">We provide expert information on crops suitable for Maharashtra's climate, connect you with quality fertilizers, inform you about government schemes, and offer seasonal advice.</p>
+                        <p class="animate-on-scroll" data-delay="500">Our mission is to empower farmers with knowledge and resources to increase productivity and income.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="parallax-section">
+            <div class="parallax-bg features-bg"></div>
+            <div class="container section-content">
+                <h2 class="section-title animate-on-scroll">Our Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card animate-on-scroll" data-delay="100">
+                        <div class="feature-icon">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <h3>Crop Information</h3>
+                        <p>Detailed guides for Kharif, Rabi, and Zaid crops suited for Maharashtra's diverse climate zones.</p>
+                        <a href="crop-info.html" class="feature-link">Explore Crops <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="feature-card animate-on-scroll" data-delay="200">
+                        <div class="feature-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3>Fertilizer Shop</h3>
+                        <p>Find the right fertilizers and farming inputs with detailed product information and application guides.</p>
+                        <a href="fertilizer-shop.html" class="feature-link">Visit Shop <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="feature-card animate-on-scroll" data-delay="300">
+                        <div class="feature-icon">
+                            <i class="fas fa-landmark"></i>
+                        </div>
+                        <h3>Government Schemes</h3>
+                        <p>Stay updated on state and central government schemes, subsidies and programs for farmers.</p>
+                        <a href="govt-schemes.html" class="feature-link">View Schemes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="feature-card animate-on-scroll" data-delay="400">
+                        <div class="feature-icon">
+                            <i class="fas fa-cloud-sun-rain"></i>
+                        </div>
+                        <h3>Seasonal Advisory</h3>
+                        <p>Month-by-month guidance on farming activities, pest management, and weather-based recommendations.</p>
+                        <a href="seasonal-advice.html" class="feature-link">Get Advice <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="parallax-section">
+            <div class="parallax-bg testimonials-bg"></div>
+            <div class="container section-content">
+                <h2 class="section-title animate-on-scroll"><span lang="mr">शेतकरी अनुभव</span> - Farmer Experiences</h2>
+                <div class="testimonials-container">
+                    <div class="testimonial animate-on-scroll" data-delay="100">
+                        <div class="testimonial-tag">कापूस शेती</div>
+                        <div class="testimonial-content">
+                            <p>"<span lang="mr">या पोर्टलवरील पीक माहितीमुळे मला माझ्या प्रदेशासाठी योग्य वाण निवडण्यात मदत झाली. यंदा माझ्या कापसाचे उत्पादन ३०% वाढले!</span>"<br><br>"The crop information helped me select the right varieties for my region. My cotton yield increased by 30% this year!"</p>
+                            <div class="testimonial-author">
+                                <div class="author-img farmer-1"></div>
+                                <div class="author-info">
+                                    <h4>राजेश पाटील</h4>
+                                    <p>कापूस शेतकरी, यवतमाळ</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial animate-on-scroll" data-delay="200">
+                        <div class="testimonial-tag">भाजीपाला</div>
+                        <div class="testimonial-content">
+                            <p>"<span lang="mr">या पोर्टलवरील मार्गदर्शनाचा वापर करून मी पीएम-किसान योजनेसाठी अर्ज केला. टप्प्याटप्प्याने दिलेल्या सूचनांमुळे हे खूप सोपे झाले.</span>"<br><br>"I applied for the PM-Kisan scheme using the guidance on this portal. The step-by-step instructions made it very easy."</p>
+                            <div class="testimonial-author">
+                                <div class="author-img farmer-2"></div>
+                                <div class="author-info">
+                                    <h4>सुनीता माने</h4>
+                                    <p>भाजीपाला उत्पादक, पुणे</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial animate-on-scroll" data-delay="300">
+                        <div class="testimonial-tag">तांदूळ शेती</div>
+                        <div class="testimonial-content">
+                            <p>"<span lang="mr">हंगामी सल्ल्यामुळे मला पेरणी आणि कापणीचे चक्र चांगल्या प्रकारे नियोजित करण्यास मदत झाली. अनपेक्षित पावसात पिकांचे नुकसान होण्यापासून मला वाचवले.</span>"<br><br>"The seasonal advisory helped me plan my sowing and harvesting cycles better. Saved me from crop loss during unexpected rains."</p>
+                            <div class="testimonial-author">
+                                <div class="author-img farmer-3"></div>
+                                <div class="author-info">
+                                    <h4>मोहम्मद खान</h4>
+                                    <p>तांदूळ शेतकरी, कोल्हापूर</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Updates Section - Changed to Top Government Schemes -->
+        <section id="updates" class="parallax-section">
+            <div class="parallax-bg updates-bg"></div>
+            <div class="container section-content">
+                <h2 class="section-title animate-on-scroll">शीर्ष सरकारी योजना - Top Government Schemes</h2>
+                <div class="schemes-container animate-on-scroll" data-delay="100">
+                    <div class="scheme-card">
+                        <div class="scheme-tag">All India</div>
+                        <h3 class="scheme-title">Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)</h3>
+                        <div class="scheme-category">Farming</div>
+                        <p class="scheme-description">₹6,000 annually to eligible farmers in three installments.</p>
+                        <div class="language-block">
+                            <span lang="mr">पात्र किसानों को सालाना ₹6,000 तीन किश्तों में।</span>
+                        </div>
+                        <a href="govt-schemes.html#pm-kisan" class="scheme-link">More Details</a>
+                    </div>
+                    
+                    <div class="scheme-card animate-on-scroll" data-delay="200">
+                        <div class="scheme-tag">All India</div>
+                        <h3 class="scheme-title">Pradhan Mantri Fasal Bima Yojana</h3>
+                        <div class="scheme-category">Insurance</div>
+                        <p class="scheme-description">Crop insurance against natural calamities with low premium.</p>
+                        <div class="language-block">
+                            <span lang="mr">प्राकृतिक आपदाओं के खिलाफ फसल बीमा।</span>
+                        </div>
+                        <a href="govt-schemes.html#pmfby" class="scheme-link">More Details</a>
+                    </div>
+                    
+                    <div class="scheme-card animate-on-scroll" data-delay="300">
+                        <div class="scheme-tag">Maharashtra</div>
+                        <h3 class="scheme-title">Atal Bhujal Yojana</h3>
+                        <div class="scheme-category">Water Management</div>
+                        <p class="scheme-description">Sustainable groundwater management with community participation.</p>
+                        <div class="language-block">
+                            <span lang="mr">समुदाय की भागीदारी से भूजल प्रबंधन।</span>
+                        </div>
+                        <a href="govt-schemes.html#atal-bhujal" class="scheme-link">More Details</a>
+                    </div>
+                </div>
+                <div class="view-all-schemes animate-on-scroll" data-delay="400">
+                    <a href="govt-schemes.html" class="cta-button secondary">View All Schemes</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="cta" class="parallax-section">
+            <div class="parallax-bg cta-bg"></div>
+            <div class="container section-content">
+                <div class="cta-container animate-on-scroll">
+                    <h2>Ready to Transform Your Farming?</h2>
+                    <p>Explore our resources and start implementing advanced farming practices today.</p>
+                    <div class="cta-buttons">
+                        <a href="crop-info.html" class="cta-button">Get Started</a>
+                        <a href="about.html" class="cta-button secondary">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <h3>AgroMitra</h3>
+                        <p>Digital Companion for Maharashtra Farmers</p>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-section">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="crop-info.html">Crop Info</a></li>
+                                <li><a href="fertilizer-shop.html">Fertilizer Shop</a></li>
+                                <li><a href="govt-schemes.html">Govt Schemes</a></li>
+                                <li><a href="seasonal-advice.html">Seasonal Advice</a></li>
+                                <li><a href="about.html">About & Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Resources</h4>
+                            <ul>
+                                <li><a href="#">Farming Videos</a></li>
+                                <li><a href="#">Success Stories</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Weather Updates</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-section">
+                            <h4>Contact</h4>
+                            <ul>
+                                <li><i class="fas fa-phone"></i> Helpline: 1800-XXX-XXXX</li>
+                                <li><i class="fas fa-envelope"></i> info@agromitra.org</li>
+                                <li><i class="fas fa-map-marker-alt"></i> D. Y. Patil College Of Engineering & Technology, Kasaba Bawada, Kolhapur</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 AgroMitra | Samruddhi-Deshpande</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script for parallax effect and animations (pure CSS approach with minimal JS) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Active nav link on scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === 'index.html' && current === 'hero') {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
